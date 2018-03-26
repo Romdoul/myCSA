@@ -14,13 +14,13 @@ class CreateUserSerializer(serializers.ModelSerializer):
 class DisplayUserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('user', 'availability', 'age', 'phone', 'skills')
+        fields = ('id', 'user', 'availability', 'age', 'phone', 'skills')
 
 
 class DisplayCompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Companies
-        fields = ('user', 'company_user', 'company_name_type')
+        fields = ('id', 'user', 'company_user', 'company_name_type')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -28,7 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = ('id', 'username', 'email', 'password')
 
     def create(self, validated_data):
         user = super(UserSerializer, self).create(validated_data)
@@ -53,3 +53,28 @@ class CompanySerializer(serializers.ModelSerializer):
         company_user.save()
         Companies.objects.create(company_user=company_user, company_name_type=2)
         return company_user
+
+class Screen1Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('country', 'full_name', 'age', 'date_of_birth', 'address', 'phone', 'email')
+
+class Screen2Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('current_designation', 'working_years_cc', 'skills', 'experiences', 'no_coworker', 'disability', 'department', 'current_salary', 'current_salary_duration')
+
+class Screen3Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('family_member', 'father_occupation', 'no_siblings', 'no_relative', 'current_asset')
+
+class Screen4Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('training', 'duration_training')
+
+class Screen5Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('job', 'location', 'expect_salary', 'payment_method', 'salary_duration')
